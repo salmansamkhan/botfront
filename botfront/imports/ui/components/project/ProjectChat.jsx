@@ -41,7 +41,7 @@ class ProjectChat extends React.Component {
         const { channel } = this.props;
         if (!channel) return this.setState({ noChannel: true });
         return this.setState({
-            socketUrl: channel.base_url,
+            socketUrl: process.env.WEBCHAT_SOCKET_URL || channel.base_url,
             path: channel.socket_path,
         });
     };

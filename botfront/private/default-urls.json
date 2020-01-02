@@ -1,0 +1,14 @@
+{
+	"dev": {
+		"rasaUrl": "http://localhost:5005",
+		"bfApiHost": "http://localhost:8080",
+		"rootUrl": "http://host.docker.internal:3000",
+		"actionsServerUrl": "http://localhost:5055/webhook"
+	},
+	"default": {
+		"rasaUrl": "http://rasa:5005",
+		"bfApiHost": "http://botfront-api:8080",
+		"rootUrl": "http://botfront:3000",
+		"actionsServerUrl": "http://actions:5055/webhook"
+	} 
+}

@@ -85,17 +85,10 @@ if (Meteor.isServer) {
             check(accountData, Object);
             check(consent, Boolean);
 
-            let spec = process.env.ORCHESTRATOR ? `.${process.env.ORCHESTRATOR}` : '.docker-compose';
-            if (process.env.MODE === 'development') spec = `${spec}.dev`;
-            if (process.env.MODE === 'test') spec = `${spec}.ci`;
-            let globalSettings = null;
-
-            try {
-                globalSettings = JSON.parse(Assets.getText(`default-settings${spec}.json`));
-            } catch (e) {
-                globalSettings = JSON.parse(Assets.getText('default-settings.json'));
-            }
-            
+            const globalSettings = JSON.parse(Assets.getText('default-settings.json'));
+            const urls = JSON.parse(Assets.getText('default-urls.json'));
+            const urlKey = process.env.MODE === 'development' ? 'dev' : 'default';
+            globalSettings.settings.private = { ...globalSettings.settings.private, ...urls[urlKey] };
             GlobalSettings.insert({ _id: 'SETTINGS', ...globalSettings });
 
             const empty = await Meteor.callWithPromise('users.checkEmpty');

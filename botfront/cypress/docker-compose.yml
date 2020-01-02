@@ -47,6 +47,7 @@ services:
       - MONGO_URL=mongodb://mongo:27017/bf
       - ORCHESTRATOR=docker-compose
       - ROOT_URL=http://botfront:3000
+      - WEBCHAT_SOCKET_URL=http://rasa:5005
 
   botfront-api:
     image: botfront-api-local
