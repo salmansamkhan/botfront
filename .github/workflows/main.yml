@@ -171,12 +171,6 @@ jobs:
           echo VERSION=$VERSION
           docker tag botfront-api-local botfront/botfront-api:$VERSION
           docker push botfront/botfront-api:$VERSION
-      - run: touch empty
-      - name: overwrite api artifact with empty file
-        uses: actions/upload-artifact@v1
-        with:
-          name: botfront-api-local
-          path: empty
 
   push-bf:
     runs-on: ubuntu-latest
@@ -200,12 +194,6 @@ jobs:
           echo VERSION=$VERSION
           docker tag botfront-local botfront/botfront:$VERSION
           docker push botfront/botfront:$VERSION
-      - run: touch empty
-      - name: overwrite bf artifact with empty file
-        uses: actions/upload-artifact@v1
-        with:
-          name: botfront-local
-          path: empty
 
   create-github-release:
     runs-on: ubuntu-latest

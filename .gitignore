@@ -2,6 +2,7 @@
 .idea/**/tasks.xml
 .idea/dictionaries
 node_modules
+!.github/actions/**/node_modules
 projects
 .idea/inspectionProfiles/Project_Default.xml
 .idea/runConfigurations/Run.xml

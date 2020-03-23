@@ -1,0 +1,10 @@
+name: 'delete-artifacts-action'
+outputs:
+  # modified:
+  #   description: 'whether the commit involves a change in any of the input paths'
+branding:
+  icon: 'zoom-in'
+  color: 'purple'
+runs:
+  using: 'node12'
+  main: 'index.js'
