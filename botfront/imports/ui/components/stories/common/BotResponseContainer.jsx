@@ -34,13 +34,24 @@ const BotResponseContainer = (props) => {
         if (focus && imageUrlRef.current) imageUrlRef.current.focus();
     }, [value.text, focus]);
 
+    const saveResponseText = (newInput) => {
+        if (isTextResponse) onChange({ text: formatNewlines(newInput) }, false);
+        if (isQRResponse) onChange({ text: formatNewlines(newInput), buttons: value.buttons }, false);
+        if (isImageResponse) onChange({ text: formatNewlines(newInput), image: value.image }, false);
+    };
+
+    useEffect(() => () => {
+        const newInput = focusGrabber.current.value;
+        const oldInput = unformatNewlines(value.text);
+        if (newInput !== oldInput) {
+            saveResponseText(newInput);
+        }
+    }, []);
 
     function handleTextBlur(e) {
         const tagRegex = new RegExp(tag);
         if (e.relatedTarget && !!e.relatedTarget.id.match(tagRegex)) return;
-        if (isTextResponse) onChange({ text: formatNewlines(input) }, false);
-        if (isQRResponse) onChange({ text: formatNewlines(input), buttons: value.buttons }, false);
-        if (isImageResponse) onChange({ text: formatNewlines(input), image: value.image }, false);
+        saveResponseText(input);
     }
 
     const setImage = image => onChange({ ...value, image, text: '' }, false);
